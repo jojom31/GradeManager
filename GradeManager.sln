@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradeManager", "GradeManager\GradeManager.csproj", "{81078838-6D97-43BA-BF6A-890FA5C73F72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81078838-6D97-43BA-BF6A-890FA5C73F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81078838-6D97-43BA-BF6A-890FA5C73F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81078838-6D97-43BA-BF6A-890FA5C73F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81078838-6D97-43BA-BF6A-890FA5C73F72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {284E61EC-73EE-493E-81EE-3B7CBF8FF0CD}
+	EndGlobalSection
+EndGlobal
