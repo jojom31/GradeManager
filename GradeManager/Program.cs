@@ -6,59 +6,111 @@ namespace GradeManager
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Grade Manager");
 
-            //Console.Write("Please Select a Number 1-8: ");
-            //Console.ReadLine();
-            MainMenu();
-        }
-        static void MainMenu()
-        {
-            Console.Clear();
-            Console.WriteLine("Welcome to My Grade Manager!");
-            Console.WriteLine("1. Add Grades");
-            Console.WriteLine("2. Edit Grades");
-            Console.WriteLine("3. Show Grades");
-            Console.WriteLine("4. Lowest Grade");
-            Console.WriteLine("5. Highest Grade");
-            Console.WriteLine("6. Exit");
-
-            string myMenu = Console.ReadLine();
-
-            switch (myMenu)
+            //List<double> grades = new List<double>();
+            Console.WriteLine("Welcome to the Grade Manager");
+            while (true)
             {
-                case "1":
-                    AddGrades();
-                    break;
-                case "2":
-                    EditGrades();
+                ShowMainMenu();
+                int menuItem = GetMenuSelection();
+                Console.Clear();
+                switch (menuItem)
+                {
+                    case "1":
+                        AddGrades();
                         break;
-                case "3":
-                    ShowGrades();
-                    break;
-                case "4":
-                    LowestGrades();
-                    break;
-                case "5":
-                    HighestGrades();
-                    break;
-                case "6":
-                    Exit();
-                    break;
+                    case "2":
+                        EditGrades();
+                        break;
+                    case "3":
+                        ShowGrades();
+                        break;
+                    case "4":
+                        LowestGrades();
+                        break;
+                    case "5":
+                        HighestGrades();
+                        break;
+                    case "6":
+                        Exit();
+                        break;
+
+                }
+                Pause();
+
+
+                //
+                //MainMenu();
 
             }
 
 
-            //
-            MainMenu();
+            //Console.WriteLine("Grade Manager");
+
+            //Console.Write("Please Select a Number 1-8: ");
+            //Console.ReadLine();
+            //MainMenu();
+        }
+        static void Pause()
+        {
+            Console.WriteLine("Press an button to return to menu.");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+        static void ShowMainMenu()
+        {
+            string mainMenu = @"
+            
+            1. Add Grades
+            2. Edit Grades
+            3. Show Grades
+            4. Lowest Grade
+            5. Highest Grade
+            6. Exit
+Please choose a number 1-8: ";
+            Console.WriteLine(mainMenu);
+
+        }
+
+        static int GetMenuSelection()
+        {
+            bool invalidEntry = true;
+            int menuSelection = 0;
+
+            do
+            {
+                try
+                {
+                    string selection = Console.ReadLine();
+                    menuSelection = int.Parse(selection);
+                    if (menuSelection < 0 || menuSelection > 8)
+                    {
+                        throw new Exception("Nope");
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Invalid Entry. Please choose a number between 1-8: ");
+                    invalidEntry = true;
+                }
+            }
+            while (invalidEntry == true);
+            return menuSelection;
         }
 
         static void AddGrades()
         {
-            Console.WriteLine("Please add grade");
-            int grade = int.Parse(Console.ReadLine());
-            Console.WriteLine(grade);
-            Console.ReadLine();
+            Console.WriteLine("Please add grade as decimal, ex.88.6 or whole number, ex 100");
+            while (true)
+            {
+                string grade = Console.ReadLine();
+            }
+            
 
         }
 
@@ -71,7 +123,7 @@ namespace GradeManager
 
         static void ShowGrades()
         {
-            Console.WriteLine("show grades");
+            Console.WriteLine("show grades"h);
             Console.ReadLine();
         }
 
