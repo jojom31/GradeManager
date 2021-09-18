@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GradeManager
 {
@@ -7,7 +9,7 @@ namespace GradeManager
         static void Main(string[] args)
         {
 
-            //List<double> grades = new List<double>();
+            List<double> grades = new List<double>();
             Console.WriteLine("Welcome to the Grade Manager");
             while (true)
             {
@@ -16,24 +18,34 @@ namespace GradeManager
                 Console.Clear();
                 switch (menuItem)
                 {
-                    case "1":
-                        AddGrades();
+                    case 1:
+                        Console.Clear();
+                        grades.Add(AddGrades());
+                        Console.WriteLine("Your Grade is added");
                         break;
-                    case "2":
-                        EditGrades();
+                    case 2:
+                        EditGrades(grades);
                         break;
-                    case "3":
-                        ShowGrades();
+                    case 3:
+                        ShowGrades(grades);
                         break;
-                    case "4":
+                    case 4:
                         LowestGrades();
                         break;
-                    case "5":
+                    case 5:
                         HighestGrades();
                         break;
-                    case "6":
-                        Exit();
+                    case 6:
+                        ClassAverage();
                         break;
+                    case 7:
+                        DeleteGrade();
+                        break;
+                    case 8:
+                        return;
+                    default:
+                        continue;
+                        
 
                 }
                 Pause();
@@ -62,12 +74,14 @@ namespace GradeManager
         {
             string mainMenu = @"
             
-            1. Add Grades
-            2. Edit Grades
-            3. Show Grades
-            4. Lowest Grade
-            5. Highest Grade
-            6. Exit
+1. Add Grades
+2. Edit Grades
+3. Show Grades
+4. Lowest Grade
+5. Highest Grade
+6. Class Average
+7. Delete Grade
+8. Exit
 Please choose a number 1-8: ";
             Console.WriteLine(mainMenu);
 
@@ -93,7 +107,7 @@ Please choose a number 1-8: ";
                         break;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Console.WriteLine("Invalid Entry. Please choose a number between 1-8: ");
                     invalidEntry = true;
@@ -103,28 +117,46 @@ Please choose a number 1-8: ";
             return menuSelection;
         }
 
-        static void AddGrades()
+        static double AddGrades()
         {
             Console.WriteLine("Please add grade as decimal, ex.88.6 or whole number, ex 100");
             while (true)
             {
                 string grade = Console.ReadLine();
+                try
+                {
+                    return double.Parse(grade);
+                }
+                catch(Exception)
+                {
+                    Console.WriteLine("Please enter in a grade.");
+                    continue;
+                }
             }
             
 
         }
 
-        static void EditGrades()
+        static void EditGrades(List<double> grades)
         {
             Console.WriteLine("edit grades");
             Console.ReadLine();
 
         }
 
-        static void ShowGrades()
+        static void ShowGrades(List<double> grades)
         {
-            Console.WriteLine("show grades"h);
-            Console.ReadLine();
+            if (IsGradeEmpty(grades))
+            {
+                return;
+            }
+            int i = 0;
+            foreach(var grade in grades)
+            {
+                string message = "Student " + i.ToString() + " : " + grade;
+                Console.WriteLine($"Student {i} :  {grade}");
+                i++;
+            }
         }
 
         static void LowestGrades()
@@ -139,13 +171,29 @@ Please choose a number 1-8: ";
             Console.ReadLine();
         }
 
-        static void Exit()
+        static void ClassAverage()
         {
             Console.WriteLine("exit");
             Console.ReadLine();
         }
 
-        
+        static void DeleteGrade()
+        {
+            Console.WriteLine("exit");
+            Console.ReadLine();
+        }
+
+        static bool IsGradeEmpty(List<double> grades)
+        {
+            if (grades.Count == 0)
+            {
+                Console.WriteLine("No Grades, please add a grade");
+                return true;
+            }
+            return false;
+        }
+
+
 
     }
 }
