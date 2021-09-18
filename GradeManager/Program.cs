@@ -30,22 +30,22 @@ namespace GradeManager
                         ShowGrades(grades);
                         break;
                     case 4:
-                        LowestGrades();
+                        LowestGrades(grades);
                         break;
                     case 5:
-                        HighestGrades();
+                        HighestGrades(grades);
                         break;
                     case 6:
-                        ClassAverage();
+                        ClassAverage(grades);
                         break;
                     case 7:
-                        DeleteGrade();
+                        DeleteGrade(grades);
                         break;
                     case 8:
                         return;
                     default:
                         continue;
-                        
+
 
                 }
                 Pause();
@@ -65,7 +65,7 @@ namespace GradeManager
         }
         static void Pause()
         {
-            Console.WriteLine("Press an button to return to menu.");
+            Console.WriteLine("Press any button to return to menu.");
             Console.ReadKey();
             Console.Clear();
         }
@@ -107,7 +107,7 @@ Please choose a number 1-8: ";
                         break;
                     }
                 }
-                catch (Exception)
+                catch (Exception )
                 {
                     Console.WriteLine("Invalid Entry. Please choose a number between 1-8: ");
                     invalidEntry = true;
@@ -127,21 +127,48 @@ Please choose a number 1-8: ";
                 {
                     return double.Parse(grade);
                 }
-                catch(Exception)
+                catch (Exception )
                 {
                     Console.WriteLine("Please enter in a grade.");
                     continue;
                 }
             }
-            
+
 
         }
 
         static void EditGrades(List<double> grades)
         {
-            Console.WriteLine("edit grades");
-            Console.ReadLine();
-
+            if (IsGradeEmpty(grades))
+            {
+                return;
+            }
+            ShowGrades(grades);
+            Console.WriteLine("Edit Grades Type and Use a comma to separate the student ID and  grade ");
+            Console.WriteLine("Ex. 1, 88");
+            Console.WriteLine("Press e to exit");
+            
+            while (true)
+            {
+                string edit = Console.ReadLine();
+                if (edit == "e") break;
+                try
+                {
+                    string[] editSplit = edit.Split(",");
+                    string student = editSplit[0];
+                    string grade = editSplit[1];
+                    int studentId = int.Parse(student);
+                    double gradeDouble = double.Parse(grade);
+                    grades[studentId] = gradeDouble;
+                    Console.WriteLine("Your Grade has been updated");
+                    break;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Student or grade is not valid");
+                    continue;
+                }
+            }
         }
 
         static void ShowGrades(List<double> grades)
@@ -151,7 +178,7 @@ Please choose a number 1-8: ";
                 return;
             }
             int i = 0;
-            foreach(var grade in grades)
+            foreach (var grade in grades)
             {
                 string message = "Student " + i.ToString() + " : " + grade;
                 Console.WriteLine($"Student {i} :  {grade}");
@@ -159,28 +186,61 @@ Please choose a number 1-8: ";
             }
         }
 
-        static void LowestGrades()
+        static void LowestGrades(List<double> grades)
         {
-            Console.WriteLine("highest grades");
-            Console.ReadLine();
+            if (IsGradeEmpty(grades))
+            {
+                return;
+            }
+            Console.WriteLine($"Lowest Grade:  {grades.Min()}");
         }
 
-        static void HighestGrades()
+        static void HighestGrades(List<double> grades)
         {
-            Console.WriteLine("Highest grades");
-            Console.ReadLine();
+            if (IsGradeEmpty(grades))
+            {
+                return;
+            }
+            Console.WriteLine($"Highest Grade:  {grades.Max()}");
         }
 
-        static void ClassAverage()
+        static void ClassAverage(List<double> grades)
         {
-            Console.WriteLine("exit");
-            Console.ReadLine();
-        }
+            if (IsGradeEmpty(grades))
+            {
+                return;
+            }
+            Console.WriteLine($"Class average: {grades.Average()}");
+        }   
+        
 
-        static void DeleteGrade()
+        static void DeleteGrade(List<double> grades)
         {
-            Console.WriteLine("exit");
-            Console.ReadLine();
+            if (IsGradeEmpty(grades))
+            {
+                return;
+            }
+            ShowGrades(grades);
+            Console.WriteLine("Select the grade you would like to remove by typing the student id # or press e to exit");
+            Console.WriteLine("Ex. remove student by pressing 1 and enter");
+
+            while (true)
+            {
+                string student = Console.ReadLine();
+                if (student == "e") break;
+                try
+                {
+                    int studentId = int.Parse(student);
+                    grades.RemoveAt(studentId);
+                    Console.WriteLine("Student has been removed");
+                    break;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Enter a valid student");
+                    continue; 
+                }
+            }
         }
 
         static bool IsGradeEmpty(List<double> grades)
