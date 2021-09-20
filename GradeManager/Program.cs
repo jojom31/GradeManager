@@ -8,6 +8,8 @@ namespace GradeManager
     {
         static void Main(string[] args)
         {
+            //ClassRoom math = new ClassRoom("Math");
+            //Console.Write(math);
 
             List<double> grades = new List<double>();
             Console.WriteLine("Welcome to the Grade Manager");
@@ -177,7 +179,7 @@ Please choose a number 1-8: ";
             {
                 return;
             }
-            int i = 0;
+            int i = 1;
             foreach (var grade in grades)
             {
                 string message = "Student " + i.ToString() + " : " + grade;
